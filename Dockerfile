@@ -20,10 +20,11 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
 
-FROM jenkinsci/jnlp-slave
+FROM jenkinsci/jnlp-slave:2.62
 
 USER root
 
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN apt-get update && apt-get install curl npm -y
 
 ENV NVM_DIR /usr/local/nvm
