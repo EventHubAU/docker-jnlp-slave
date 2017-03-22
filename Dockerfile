@@ -47,6 +47,8 @@ RUN apt-get -qq --fix-missing install build-essential \
     && curl -L https://get.rvm.io | bash -s stable --ruby \
     && apt-get -qq install libmysqlclient-dev ruby-dev
 
+RUN apt-get install lsb-release
+
 RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list' \
     && wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key add - \
     && apt-get -y --purge remove postgresql\* \
@@ -55,9 +57,10 @@ RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-
     && apt list --installed | grep postgresql \
     && source /usr/local/rvm/scripts/rvm \
 
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash \
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | sh \
+    && NVM_DIR="/usr/local/nvm" \
+    && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
     && nvm install 4.5 \
     && nvm install 6
-
 
 USER jenkins
