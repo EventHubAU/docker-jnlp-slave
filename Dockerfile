@@ -32,7 +32,8 @@ ENV NODE_VERSION 4.5
 ENV NVM_VERSION 0.26.1
 ENV TRAVIS TRUE
 
-# # Install nvm with node and npm
+RUN apt-get install -yq apt-transport-https
+
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v$NVM_VERSION/install.sh | bash \
     && source $NVM_DIR/nvm.sh \
     && nvm install 4.5 \
@@ -62,5 +63,9 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh
     && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
     && nvm install 4.5 \
     && nvm install 6
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+    && apt-get -yq update && apt-get -yq install yarn
 
 USER jenkins
