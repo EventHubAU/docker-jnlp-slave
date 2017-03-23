@@ -56,7 +56,7 @@ RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-
     && apt-get -yq update \
     && apt-get -yqq install postgresql-9.6 postgresql-contrib-9.6 postgresql-client-9.6 libpq-dev \
     && apt list --installed | grep postgresql \
-    && source /usr/local/rvm/scripts/rvm \
+    && source /usr/local/rvm/scripts/rvm
 
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | sh \
     && NVM_DIR="/usr/local/nvm" \
@@ -69,5 +69,3 @@ RUN npm install babel-cli -g
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get -yq update && apt-get -yq install yarn
-
-USER jenkins
