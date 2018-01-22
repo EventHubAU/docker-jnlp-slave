@@ -20,7 +20,7 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
 
-FROM jenkinsci/jnlp-slave:2.62
+FROM jenkins/jnlp-slave:3.16-1
 
 USER root
 
